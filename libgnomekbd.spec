@@ -26,6 +26,7 @@ BuildRequires:	rpmbuild(macros) >= 1.311
 Requires(post,preun):	GConf2
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Conflicts:	control-center < 1:2.17.92
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
