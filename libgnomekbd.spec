@@ -4,14 +4,14 @@
 #
 Summary:	A keyboard configuration library
 Name:		libgnomekbd
-Version:	2.17.92
+Version:	2.18.0
 Release:	1
 License:	LGPL
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomekbd/2.17/%{name}-%{version}.tar.bz2
-# Source0-md5:	00fe605e89717b6ec77ac7e9da3c5925
+Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomekbd/2.18/%{name}-%{version}.tar.bz2
+# Source0-md5:	f176e026158f678144511fb343ec7269
 URL:		http://www.gnome.org/
-BuildRequires:	GConf2-devel >= 2.16.1
+BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	dbus-glib-devel >= 0.73
