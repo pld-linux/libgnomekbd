@@ -1,8 +1,5 @@
-#
-# TODO:
-# - pl summary and description
-#
 Summary:	A keyboard configuration library
+Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
 Version:	2.18.0
 Release:	1
@@ -24,6 +21,7 @@ BuildRequires:	libxklavier-devel >= 3.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
 Requires(post,preun):	GConf2
+Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Conflicts:	control-center < 1:2.17.92
@@ -34,21 +32,34 @@ The libgnomekbd package contains a GNOME library which manages
 keyboard configuration and offers various widgets related to keyboard
 configuration.
 
+%description -l pl.UTF-8
+Pakiet libgnomekbd zawiera bibliotekę GNOME zarządzającą konfiguracją
+klawiatury i oferującą różne widgety związane z konfiguracją
+klawiatury.
+
 %package devel
 Summary:	Header files for libgnomekbd
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgnomekbd
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files for libgnomekbd.
 
+%description devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki libgnomekbd.
+
 %package static
 Summary:	Static libgnomekbd library
+Summary(pl.UTF-8):	Statyczna biblioteka libgnomekbd
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libgnomekbd library.
+
+%description static -l pl.UTF-8
+Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
