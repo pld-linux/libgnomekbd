@@ -1,29 +1,30 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.18.0
+Version:	2.18.1
 Release:	1
 License:	LGPL
 Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/gnome/sources/libgnomekbd/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	f176e026158f678144511fb343ec7269
+# Source0-md5:	4d69db2ad5f7e8e71ed4fa167381e239
+Patch0:		%{name}-desktop.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.18.0.1
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	dbus-glib-devel >= 0.73
-BuildRequires:	gtk+2-devel >= 2:2.10.9
+BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.17.92
+BuildRequires:	libgnomeui-devel >= 2.18.1
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 3.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.311
-Requires(post,preun):	GConf2
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Requires(post,preun):	GConf2
 Conflicts:	control-center < 1:2.17.92
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,6 +64,7 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__glib_gettextize}
