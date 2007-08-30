@@ -8,6 +8,7 @@ Group:		Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.19/%{name}-%{version}.tar.bz2
 # Source0-md5:	9ca7372fba612b99d1e085e648e6c232
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-popt.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.19.1
 BuildRequires:	autoconf >= 2.59
@@ -65,6 +66,7 @@ Statyczna biblioteka libgnomekbd.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__glib_gettextize}
