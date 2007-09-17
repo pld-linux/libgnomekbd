@@ -1,12 +1,12 @@
-diff -urN libgnomekbd-2.18.1/capplet/gkbd-indicator-plugins-capplet.desktop.in.in libgnomekbd-2.18.1.new/capplet/gkbd-indicator-plugins-capplet.desktop.in.in
---- libgnomekbd-2.18.1/capplet/gkbd-indicator-plugins-capplet.desktop.in.in	2007-03-17 23:40:04.000000000 +0100
-+++ libgnomekbd-2.18.1.new/capplet/gkbd-indicator-plugins-capplet.desktop.in.in	2007-04-09 11:29:52.000000000 +0200
+diff -urN libgnomekbd-2.19.91/capplet/gkbd-indicator-plugins-capplet.desktop.in.in libgnomekbd-2.19.91.new/capplet/gkbd-indicator-plugins-capplet.desktop.in.in
+--- libgnomekbd-2.19.91/capplet/gkbd-indicator-plugins-capplet.desktop.in.in	2007-08-29 17:58:10.000000000 +0200
++++ libgnomekbd-2.19.91.new/capplet/gkbd-indicator-plugins-capplet.desktop.in.in	2007-08-29 18:01:35.000000000 +0200
 @@ -7,7 +7,7 @@
  Terminal=false
  Type=Application
  StartupNotify=true
--Categories=GNOME;Settings;DesktopSettings
+-Categories=GNOME;Settings;DesktopSettings;
 +Categories=GTK;GNOME;Settings;DesktopSettings;
  OnlyShowIn=GNOME;
+ NoDisplay=true
  X-GNOME-Bugzilla-Bugzilla=GNOME
- X-GNOME-Bugzilla-Product=libgnomekbd
