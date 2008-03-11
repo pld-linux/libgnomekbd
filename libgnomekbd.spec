@@ -1,23 +1,24 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.20.0
-Release:	2
-License:	LGPL
+Version:	2.21.4.1
+Release:	1
+License:	LGPL v2+
 Group:		Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	0b495d355e25c3531419cb3996be7e28
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.21/%{name}-%{version}.tar.bz2
+# Source0-md5:	ba87357d09cfb804f87a6c67b7460118
 Patch0:		%{name}-desktop.patch
-Patch1:		%{name}-popt.patch
 URL:		http://www.gnome.org/
-BuildRequires:	GConf2-devel >= 2.19.1
+BuildRequires:	GConf2-devel >= 2.20.0
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.8
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.73
-BuildRequires:	gtk+2-devel >= 2:2.10.14
+BuildRequires:	gettext-devel
+BuildRequires:	gnome-common >= 2.20.0
+BuildRequires:	gtk+2-devel >= 2:2.12.3
 BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.19.1
+BuildRequires:	libgnomeui-devel >= 2.20.1
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 3.2
 BuildRequires:	pkgconfig
@@ -66,7 +67,6 @@ Statyczna biblioteka libgnomekbd.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__glib_gettextize}
