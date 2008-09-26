@@ -1,24 +1,23 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.22.0
+Version:	2.24.0
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.22/%{name}-%{version}.tar.bz2
-# Source0-md5:	a8b64278ae3471583607d734db9347eb
-Patch0:		%{name}-desktop.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	43e4d090bc67a1984bebf551637783fd
 URL:		http://www.gnome.org/
-BuildRequires:	GConf2-devel >= 2.22.0
+BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gtk+2-devel >= 2:2.12.3
+BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.22.0
+BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 3.5
 BuildRequires:	pkgconfig
@@ -43,9 +42,9 @@ Summary:	Header files for libgnomekbd
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgnomekbd
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	GConf2-devel >= 2.22.0
+Requires:	GConf2-devel >= 2.24.0
 Requires:	dbus-glib-devel >= 0.73
-Requires:	gtk+2-devel >= 2:2.12.3
+Requires:	gtk+2-devel >= 2:2.14.0
 
 %description devel
 Header files for libgnomekbd.
@@ -67,7 +66,6 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__glib_gettextize}
@@ -107,9 +105,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_bindir}/gkbd-indicator-plugins-capplet
 %attr(755,root,root) %{_libdir}/libgnomekbd.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.2
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.3
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.2
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.3
 %{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
 %{_desktopdir}/gkbd-indicator-plugins-capplet.desktop
 %{_datadir}/libgnomekbd
