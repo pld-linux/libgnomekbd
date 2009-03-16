@@ -1,12 +1,12 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.24.0
-Release:	2
+Version:	2.26.0
+Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	43e4d090bc67a1984bebf551637783fd
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.26/%{name}-%{version}.tar.bz2
+# Source0-md5:	aee58c088c4fd980e1bf813ea813c156
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
@@ -14,10 +14,9 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gtk+2-devel >= 2:2.14.0
-BuildRequires:	intltool >= 0.36.1
+BuildRequires:	gtk+2-devel >= 2:2.16.0
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.24.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 3.5
 BuildRequires:	pkgconfig
@@ -44,7 +43,8 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	GConf2-devel >= 2.24.0
 Requires:	dbus-glib-devel >= 0.73
-Requires:	gtk+2-devel >= 2:2.14.0
+Requires:	gtk+2-devel >= 2:2.16.0
+Requires:	libxklavier-devel >= 3.5
 
 %description devel
 Header files for libgnomekbd.
