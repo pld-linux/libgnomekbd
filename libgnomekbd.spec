@@ -66,6 +66,8 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
+sed -i s#ca@valencia## po/LINGUAS
+rm -f po/ca@vaencia.po
 
 %build
 %{__glib_gettextize}
