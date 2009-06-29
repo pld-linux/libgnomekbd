@@ -1,0 +1,143 @@
+From 3b40029262b0007db0d3cb07b0ef658a391063aa Mon Sep 17 00:00:00 2001
+From: Sergey V. Udaltsov <svu@gnome.org>
+Date: Sun, 28 Jun 2009 23:56:35 +0000
+Subject: Optional loading of extras, using libxklavier 4.0
+
+Now, xkeyboard-config has separate section for exotic layouts.
+libxklavier 4.0 supports that feature. Now, it is configurable through
+gconf
+---
+diff --git a/configure.in b/configure.in
+index e349124..26d6440 100644
+--- a/configure.in
++++ b/configure.in
+@@ -4,7 +4,7 @@ dnl ***************************************************************************
+ AC_INIT(libgnomekbd, 2.27.2, [http://bugzilla.gnome.org/enter_bug.cgi?product=libgnomekbd])
+ AC_PREREQ(2.59)
+ 
+-VERSION_INFO=3:0:0
++VERSION_INFO=4:0:0
+ AC_SUBST(VERSION_INFO)
+ 
+ AM_CONFIG_HEADER(config.h)
+@@ -20,7 +20,7 @@ DBUS_GLIB_REQUIRED=0.34
+ GCONF_REQUIRED=2.14.0
+ GDK_REQUIRED=2.13
+ GTK_REQUIRED=2.13
+-LIBXKLAVIER_REQUIRED=3.2
++LIBXKLAVIER_REQUIRED=4.0
+ 
+ AC_SUBST([DBUS_REQUIRED])
+ AC_SUBST([DBUS_GLIB_REQUIRED])
+diff --git a/libgnomekbd/desktop_gnome_peripherals_keyboard_xkb.schemas.in b/libgnomekbd/desktop_gnome_peripherals_keyboard_xkb.schemas.in
+index f33e9b2..f4dc889 100644
+--- a/libgnomekbd/desktop_gnome_peripherals_keyboard_xkb.schemas.in
++++ b/libgnomekbd/desktop_gnome_peripherals_keyboard_xkb.schemas.in
+@@ -116,6 +116,18 @@
+     </schema>
+ 
+     <schema>
++      <key>/schemas/desktop/gnome/peripherals/keyboard/general/loadExtraItems</key>
++      <applyto>/desktop/gnome/peripherals/keyboard/general/loadExtraItems</applyto>
++      <owner>gnome</owner>    
++      <type>bool</type>
++      <default>false</default>
++      <locale name="C">
++        <short>Load extra configuration items</short>
++	<long>Load exotic, rarely used layouts and options</long>
++      </locale>
++    </schema>
++
++    <schema>
+       <key>/schemas/desktop/gnome/peripherals/keyboard/general/disable_sysconfig_changed_warning</key>
+       <applyto>/desktop/gnome/peripherals/keyboard/general/disable_sysconfig_changed_warning</applyto>
+       <owner>gnome</owner>    
+diff --git a/libgnomekbd/gkbd-desktop-config.c b/libgnomekbd/gkbd-desktop-config.c
+index dd96e80..8a8ab91 100644
+--- a/libgnomekbd/gkbd-desktop-config.c
++++ b/libgnomekbd/gkbd-desktop-config.c
+@@ -43,6 +43,8 @@ const gchar GKBD_DESKTOP_CONFIG_KEY_HANDLE_INDICATORS[] =
+     GKBD_DESKTOP_CONFIG_KEY_PREFIX "/handleIndicators";
+ const gchar GKBD_DESKTOP_CONFIG_KEY_LAYOUT_NAMES_AS_GROUP_NAMES[]
+     = GKBD_DESKTOP_CONFIG_KEY_PREFIX "/layoutNamesAsGroupNames";
++const gchar GKBD_DESKTOP_CONFIG_KEY_LOAD_EXTRA_ITEMS[]
++    = GKBD_DESKTOP_CONFIG_KEY_PREFIX "/loadExtraItems";
+ 
+ /**
+  * static common functions
+@@ -231,6 +233,20 @@ gkbd_desktop_config_load_from_gconf (GkbdDesktopConfig * config)
+ 	xkl_debug (150, "layout_names_as_group_names: %d\n",
+ 		   config->layout_names_as_group_names);
+ 
++	config->load_extra_items =
++	    gconf_client_get_bool (config->conf_client,
++				   GKBD_DESKTOP_CONFIG_KEY_LOAD_EXTRA_ITEMS,
++				   &gerror);
++	if (gerror != NULL) {
++		g_warning ("Error reading configuration:%s\n",
++			   gerror->message);
++		config->load_extra_items = FALSE;
++		g_error_free (gerror);
++		gerror = NULL;
++	}
++	xkl_debug (150, "load_extra_items: %d\n",
++		   config->load_extra_items);
++
+ 	config->default_group =
+ 	    gconf_client_get_int (config->conf_client,
+ 				  GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
+@@ -267,6 +283,9 @@ gkbd_desktop_config_save_to_gconf (GkbdDesktopConfig * config)
+ 	gconf_change_set_set_bool (cs,
+ 				   GKBD_DESKTOP_CONFIG_KEY_LAYOUT_NAMES_AS_GROUP_NAMES,
+ 				   config->layout_names_as_group_names);
++	gconf_change_set_set_bool (cs,
++				   GKBD_DESKTOP_CONFIG_KEY_LOAD_EXTRA_ITEMS,
++				   config->load_extra_items);
+ 	gconf_change_set_set_int (cs,
+ 				  GKBD_DESKTOP_CONFIG_KEY_DEFAULT_GROUP,
+ 				  config->default_group);
+diff --git a/libgnomekbd/gkbd-desktop-config.h b/libgnomekbd/gkbd-desktop-config.h
+index 6dc6fc6..5f66909 100644
+--- a/libgnomekbd/gkbd-desktop-config.h
++++ b/libgnomekbd/gkbd-desktop-config.h
+@@ -39,6 +39,7 @@ typedef struct _GkbdDesktopConfig {
+ 	gboolean group_per_app;
+ 	gboolean handle_indicators;
+ 	gboolean layout_names_as_group_names;
++	gboolean load_extra_items;
+ 
+ 	/* private, transient */
+ 	GConfClient *conf_client;
+diff --git a/libgnomekbd/gkbd-indicator.c b/libgnomekbd/gkbd-indicator.c
+index 48b59cb..0b43f85 100644
+--- a/libgnomekbd/gkbd-indicator.c
++++ b/libgnomekbd/gkbd-indicator.c
+@@ -714,11 +714,6 @@ gkbd_indicator_global_init (void)
+ 		return;
+ 	}
+ 
+-	globals.registry =
+-	    xkl_config_registry_get_instance (globals.engine);
+-
+-	xkl_config_registry_load (globals.registry);
+-
+ 	gconf_client = gconf_client_get_default ();
+ 
+ 	g_signal_connect (globals.engine, "X-state-changed",
+@@ -742,8 +737,14 @@ gkbd_indicator_global_init (void)
+ 
+ 	gkbd_desktop_config_load_from_gconf (&globals.cfg);
+ 	gkbd_desktop_config_activate (&globals.cfg);
++
++	globals.registry =
++	    xkl_config_registry_get_instance (globals.engine);
++	xkl_config_registry_load (globals.registry, globals.cfg.load_extra_items);
++
+ 	gkbd_keyboard_config_load_from_x_current (&globals.kbd_cfg,
+ 						  xklrec);
++
+ 	gkbd_indicator_config_load_from_gconf (&globals.ind_cfg);
+ 	gkbd_indicator_config_update_images (&globals.ind_cfg,
+ 					     &globals.kbd_cfg);
+--
+cgit v0.8.2
