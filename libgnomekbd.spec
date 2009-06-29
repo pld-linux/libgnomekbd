@@ -2,11 +2,12 @@ Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
 Version:	2.27.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.27/%{name}-%{version}.tar.bz2
 # Source0-md5:	ea5a1f1965373b4506c07c64aae9a0c4
+Patch0:		%{name}-libxklavier40.patch
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
@@ -18,7 +19,7 @@ BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 BuildRequires:	libtool
-BuildRequires:	libxklavier-devel >= 3.5
+BuildRequires:	libxklavier-devel >= 4.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.198
 Requires(post,postun):	/sbin/ldconfig
@@ -66,6 +67,7 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
+%patch0 -p1
 sed -i s#ca@valencia## po/LINGUAS
 rm -f po/ca@vaencia.po
 
@@ -107,9 +109,9 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_bindir}/gkbd-indicator-plugins-capplet
 %attr(755,root,root) %{_libdir}/libgnomekbd.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.3
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.4
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.3
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.4
 %{_sysconfdir}/gconf/schemas/desktop_gnome_peripherals_keyboard_xkb.schemas
 %{_desktopdir}/gkbd-indicator-plugins-capplet.desktop
 %{_datadir}/libgnomekbd
