@@ -1,12 +1,12 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.27.4
+Version:	2.27.91
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.27/%{name}-%{version}.tar.bz2
-# Source0-md5:	f5bd68f8e71d093e0f9721ff952b179b
+# Source0-md5:	6e89d5ed36a5785053cd9ec451d9af49
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
