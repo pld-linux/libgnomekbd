@@ -1,12 +1,12 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.28.2
-Release:	2
+Version:	2.29.5
+Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	28dce813a6c76439a2136fbd2394a058
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.29/%{name}-%{version}.tar.bz2
+# Source0-md5:	f16878ffd00eb8fb9df1e81fd21f6d6c
 URL:		http://www.gnome.org/
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	autoconf >= 2.59
@@ -17,7 +17,7 @@ BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gtk+2-devel >= 2:2.16.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
-BuildRequires:	libxklavier-devel >= 4.0
+BuildRequires:	libxklavier-devel >= 5.0
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.198
 BuildRequires:	sed >= 4.0
@@ -44,7 +44,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	GConf2-devel >= 2.24.0
 Requires:	dbus-glib-devel >= 0.73
 Requires:	gtk+2-devel >= 2:2.16.0
-Requires:	libxklavier-devel >= 4.0
+Requires:	libxklavier-devel >= 5.0
 
 %description devel
 Header files for libgnomekbd.
