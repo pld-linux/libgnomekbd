@@ -1,0 +1,30 @@
+From e431fae90ed97debb86fc9e0c89622e524feb213 Mon Sep 17 00:00:00 2001
+From: Saleem Abdulrasool <compnerd@compnerd.org>
+Date: Thu, 23 Dec 2010 01:08:04 +0000
+Subject: fix for newer gtk+
+
+---
+diff --git a/configure.in b/configure.in
+index f50990d..59a8753 100644
+--- a/configure.in
++++ b/configure.in
+@@ -16,7 +16,7 @@ dnl ***************************************************************************
+ dnl *** Minimum library versions for libgnomekbd                            ***
+ dnl ***************************************************************************
+ GLIB_REQUIRED=2.18
+-GDK_REQUIRED=2.18
++GDK_REQUIRED=2.91.7
+ GTK_REQUIRED=2.90
+ LIBXKLAVIER_REQUIRED=5.0
+ 
+@@ -63,7 +63,7 @@ PKG_CHECK_MODULES(GDK, gdk-3.0 >= $GDK_REQUIRED)
+ AC_SUBST(GDK_CFLAGS)
+ AC_SUBST(GDK_LIBS)
+ 
+-PKG_CHECK_MODULES(GTK, gtk+-3.0 >= $GTK_REQUIRED gdk-x11-3.0 >= $GDK_REQUIRED)
++PKG_CHECK_MODULES(GTK, gtk+-3.0 >= $GTK_REQUIRED)
+ 
+ AC_SUBST(GTK_CFLAGS)
+ AC_SUBST(GTK_LIBS)
+--
+cgit v0.8.3.1
