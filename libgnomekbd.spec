@@ -1,18 +1,19 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.91.2
+Version:	2.91.4
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	90f219d19441d149864fc40d7b8283eb
+# Source0-md5:	fa9a390898c23a0db0429819c4bc93bf
+Patch0:		gdk.patch
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gtk+3-devel >= 2.91.0
+BuildRequires:	gtk+3-devel >= 2.91.7
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 5.0
@@ -39,7 +40,7 @@ Summary:	Header files for libgnomekbd
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgnomekbd
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+3-devel >= 2.91.0
+Requires:	gtk+3-devel >= 2.91.7
 Requires:	libxklavier-devel >= 5.0
 
 %description devel
@@ -62,6 +63,7 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__glib_gettextize}
