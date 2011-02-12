@@ -2,7 +2,7 @@ Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
 Version:	2.91.5
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.91/%{name}-%{version}.tar.bz2
@@ -12,7 +12,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.20.0
-BuildRequires:	gtk+3-devel >= 2.91.7
+BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 5.0
@@ -39,7 +39,7 @@ Summary:	Header files for libgnomekbd
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgnomekbd
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	gtk+3-devel >= 2.91.7
+Requires:	gtk+3-devel >= 3.0.0
 Requires:	libxklavier-devel >= 5.0
 
 %description devel
@@ -81,6 +81,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %find_lang %{name}
 
 %clean
@@ -114,8 +116,6 @@ fi
 %attr(755,root,root) %{_libdir}/libgnomekbd.so
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so
 %{_includedir}/libgnomekbd
-%{_libdir}/libgnomekbd.la
-%{_libdir}/libgnomekbdui.la
 %{_pkgconfigdir}/libgnomekbd.pc
 %{_pkgconfigdir}/libgnomekbdui.pc
 %{_datadir}/gir-1.0/Gkbd-3.0.gir
