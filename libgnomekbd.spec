@@ -1,12 +1,12 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.91.5
-Release:	2
+Version:	2.91.90
+Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	3327d8619c3a614f708a29b620f84845
+# Source0-md5:	697a40b98a2f585d191448c46dd2def5
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -15,7 +15,7 @@ BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
-BuildRequires:	libxklavier-devel >= 5.0
+BuildRequires:	libxklavier-devel >= 5.1
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.593
 BuildRequires:	sed >= 4.0
@@ -102,11 +102,13 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog
 %attr(755,root,root) %{_bindir}/gkbd-indicator-plugins-capplet
+%attr(755,root,root) %{_bindir}/gkbd-keyboard-display
 %attr(755,root,root) %{_libdir}/libgnomekbd.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.7
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.7
 %{_desktopdir}/gkbd-indicator-plugins-capplet.desktop
+%{_datadir}/GConf/gsettings/libgnomekbd.convert
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/libgnomekbd
 %{_libdir}/girepository-1.0/Gkbd-3.0.typelib
