@@ -1,17 +1,18 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	2.91.90
+Version:	2.91.91
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.91/%{name}-%{version}.tar.bz2
-# Source0-md5:	697a40b98a2f585d191448c46dd2def5
+# Source0-md5:	51c429bd6e28e293cf808c6511aaa772
 URL:		http://www.gnome.org/
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-common >= 2.20.0
+BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libtool
@@ -40,7 +41,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libgnomekbd
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	gtk+3-devel >= 3.0.0
-Requires:	libxklavier-devel >= 5.0
+Requires:	libxklavier-devel >= 5.1
 
 %description devel
 Header files for libgnomekbd.
@@ -108,6 +109,7 @@ fi
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.7
 %{_desktopdir}/gkbd-indicator-plugins-capplet.desktop
+%{_desktopdir}/gkbd-keyboard-display.desktop
 %{_datadir}/GConf/gsettings/libgnomekbd.convert
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
 %{_datadir}/libgnomekbd
