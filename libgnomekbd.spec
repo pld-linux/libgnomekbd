@@ -2,7 +2,7 @@ Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
 Version:	2.32.0
-Release:	2
+Release:	3
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/2.32/%{name}-%{version}.tar.bz2
@@ -87,6 +87,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %find_lang %{name}
 
 %clean
@@ -119,8 +121,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libgnomekbd.so
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so
 %{_includedir}/libgnomekbd
-%{_libdir}/libgnomekbd.la
-%{_libdir}/libgnomekbdui.la
 %{_pkgconfigdir}/libgnomekbd.pc
 %{_pkgconfigdir}/libgnomekbdui.pc
 
