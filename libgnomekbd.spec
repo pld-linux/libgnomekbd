@@ -21,11 +21,12 @@ BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 5.2
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.593
-BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	libxklavier >= 5.2
 Conflicts:	control-center < 1:2.17.92
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -106,7 +107,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog
+%doc AUTHORS ChangeLog NEWS
 %attr(755,root,root) %{_bindir}/gkbd-keyboard-display
 %attr(755,root,root) %{_libdir}/libgnomekbd.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.7
