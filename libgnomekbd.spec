@@ -1,13 +1,12 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	3.4.0.2
+Version:	3.6.0
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/3.4/%{name}-%{version}.tar.xz
-# Source0-md5:	9772d124e0cca6a70b9e7cf85032a297
-Patch0:		%{name}-install.patch
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/3.6/%{name}-%{version}.tar.xz
+# Source0-md5:	2f000ed5aa11454936c846a784e484c7
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
@@ -68,7 +67,6 @@ Statyczna biblioteka libgnomekbd.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__glib_gettextize}
@@ -110,9 +108,9 @@ fi
 %doc AUTHORS ChangeLog NEWS
 %attr(755,root,root) %{_bindir}/gkbd-keyboard-display
 %attr(755,root,root) %{_libdir}/libgnomekbd.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.7
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.8
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.7
+%attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.8
 %{_desktopdir}/gkbd-keyboard-display.desktop
 %{_datadir}/GConf/gsettings/libgnomekbd.convert
 %{_datadir}/glib-2.0/schemas/*.gschema.xml
