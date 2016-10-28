@@ -10,7 +10,7 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/3.22/%{name}-%{versi
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.19.4
 BuildRequires:	glib2-devel >= 1:2.18.0
 BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
