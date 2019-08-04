@@ -1,18 +1,17 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	3.26.0
+Version:	3.26.1
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/3.26/%{name}-%{version}.tar.xz
-# Source0-md5:	8b9d13d46255cde910b3db5a6ebb4727
+# Source0-md5:	98040022484406e7ebe25f82cef93344
 URL:		http://www.gnome.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-tools >= 0.19.4
 BuildRequires:	glib2-devel >= 1:2.18.0
-BuildRequires:	gnome-common >= 2.20.0
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	libtool
@@ -108,11 +107,11 @@ fi
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbd.so.8
 %attr(755,root,root) %{_libdir}/libgnomekbdui.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgnomekbdui.so.8
-%{_desktopdir}/gkbd-keyboard-display.desktop
-%{_datadir}/GConf/gsettings/libgnomekbd.convert
-%{_datadir}/glib-2.0/schemas/*.gschema.xml
-%{_datadir}/libgnomekbd
 %{_libdir}/girepository-1.0/Gkbd-3.0.typelib
+%{_datadir}/GConf/gsettings/libgnomekbd.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.libgnomekbd*.gschema.xml
+%{_datadir}/libgnomekbd
+%{_desktopdir}/gkbd-keyboard-display.desktop
 
 %files devel
 %defattr(644,root,root,755)
