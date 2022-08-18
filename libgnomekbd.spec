@@ -1,28 +1,29 @@
 Summary:	A keyboard configuration library
 Summary(pl.UTF-8):	Biblioteka do konfiguracji klawiatury
 Name:		libgnomekbd
-Version:	3.26.1
+Version:	3.28.0
 Release:	1
 License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/libgnomekbd/3.26/%{name}-%{version}.tar.xz
-# Source0-md5:	98040022484406e7ebe25f82cef93344
-URL:		http://www.gnome.org/
+Source0:	https://download.gnome.org/sources/libgnomekbd/3.28/%{name}-%{version}.tar.xz
+# Source0-md5:	a34280935a6469c79c8e2f1b7bb10387
+URL:		https://www.gnome.org/
 BuildRequires:	autoconf >= 2.62
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	gettext-tools >= 0.19.4
-BuildRequires:	glib2-devel >= 1:2.18.0
+BuildRequires:	gettext-tools >= 0.19.6
+BuildRequires:	glib2-devel >= 1:2.44
 BuildRequires:	gobject-introspection-devel >= 0.10.0
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 5.2
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 1.593
+BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
-Requires(post,postun):	glib2 >= 1:2.26.0
+Requires:	glib2 >= 1:2.44
 Requires:	libxklavier >= 5.2
 Conflicts:	control-center < 1:2.17.92
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -66,23 +67,38 @@ Statyczna biblioteka libgnomekbd.
 %prep
 %setup -q
 
+%{__sed} -i -e '/^po\/Makefile\.in$/d' configure.ac
+
 %build
+# as of 3.28.0 meson support is incomplete (broken libraries soname, gir files not installed)
+%if 1
+%{__gettextize}
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
 	--disable-silent-rules \
 	--enable-static
 %{__make}
+%else
+%meson build
+
+%ninja_build -C build
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%if 1
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%else
+%ninja_install -C build
+%endif
 
 %find_lang %{name}
 
