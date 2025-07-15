@@ -83,9 +83,9 @@ Statyczna biblioteka libgnomekbd.
 	--enable-static
 %{__make}
 %else
-%meson build
+%meson
 
-%ninja_build -C build
+%meson_build
 %endif
 
 %install
@@ -97,7 +97,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 %else
-%ninja_install -C build
+%meson_install
 %endif
 
 %find_lang %{name}
