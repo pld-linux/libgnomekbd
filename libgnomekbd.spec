@@ -17,7 +17,7 @@ BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 5.2
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.593
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xorg-lib-libX11-devel
